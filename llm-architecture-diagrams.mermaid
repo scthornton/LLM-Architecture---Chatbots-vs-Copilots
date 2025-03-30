@@ -1,0 +1,32 @@
+%%{init: {'theme': 'neutral'}}%%
+graph TD
+    subgraph "Common LLM Application Architecture"
+        User([User]) --> Frontend[Frontend Interface]
+        Frontend --> APIGateway[API Gateway/Load Balancer]
+        APIGateway --> RequestHandler[Request Handler]
+        RequestHandler --> PromptEngine[Prompt Engineering]
+        PromptEngine --> LLMService[LLM Service]
+        LLMService --> ResponseProcessor[Response Processor]
+        ResponseProcessor --> Frontend
+        
+        LLMService <--> VectorDB[(Vector Database)]
+        LLMService <--> Tools[Tool Integration]
+        
+        subgraph "Operational Layer"
+            Logging[Logging & Monitoring]
+            Feedback[User Feedback]
+            Analytics[Performance Analytics]
+        end
+        
+        Frontend -.-> Logging
+        ResponseProcessor -.-> Feedback
+        LLMService -.-> Analytics
+    end
+    
+    classDef primary fill:#D4F1F9,stroke:#05445E,stroke-width:2px
+    classDef secondary fill:#F9F1F9,stroke:#8E44AD,stroke-width:2px
+    classDef tertiary fill:#FFF2CC,stroke:#D35400,stroke-width:2px
+    
+    class User,Frontend,LLMService primary
+    class APIGateway,RequestHandler,PromptEngine,ResponseProcessor secondary
+    class VectorDB,Tools,Logging,Feedback,Analytics tertiary

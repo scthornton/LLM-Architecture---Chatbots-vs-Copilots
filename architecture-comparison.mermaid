@@ -1,0 +1,40 @@
+%%{init: {'theme': 'neutral'}}%%
+graph TD
+    subgraph "Chatbot Architecture"
+        C_User([User]) --> C_Interface[Chat Interface]
+        C_Interface --> C_History[Conversation History]
+        C_History --> C_Prompt[Prompt Template]
+        C_Prompt --> C_LLM[LLM Service]
+        C_LLM --> C_Parser[Response Parser]
+        C_Parser --> C_Interface
+        
+        C_LLM <--> C_RAG[Knowledge Base/RAG]
+        C_LLM <-.-> C_BasicFunctions[Basic Function Calling]
+    end
+    
+    subgraph "Copilot Architecture"
+        P_User([User]) --> P_App[Host Application]
+        P_App --> P_Context[Context Builder]
+        P_Context --> P_Prompt[Enhanced Prompt]
+        P_Prompt --> P_LLM[LLM Service]
+        P_LLM --> P_Actions[Action Generator]
+        P_Actions --> P_App
+        
+        P_App <--> P_AppState[Application State]
+        P_AppState --> P_Context
+        P_LLM <--> P_RAG[Knowledge Base/RAG]
+        P_LLM <--> P_Functions[Function Registry]
+        P_Functions <--> P_App
+    end
+    
+    classDef userNode fill:#FFF2CC,stroke:#D35400,stroke-width:2px
+    classDef interfaceNode fill:#D4F1F9,stroke:#05445E,stroke-width:2px
+    classDef processingNode fill:#F9F1F9,stroke:#8E44AD,stroke-width:2px
+    classDef llmNode fill:#D5F5E3,stroke:#1E8449,stroke-width:2px
+    classDef dataNode fill:#FADBD8,stroke:#943126,stroke-width:2px
+    
+    class C_User,P_User userNode
+    class C_Interface,P_App interfaceNode
+    class C_History,C_Prompt,C_Parser,P_Context,P_Prompt,P_Actions processingNode
+    class C_LLM,P_LLM llmNode
+    class C_RAG,C_BasicFunctions,P_RAG,P_Functions,P_AppState dataNode
