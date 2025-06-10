@@ -612,5 +612,4 @@ Remember, the best implementations start small and grow through iteration based 
 <div align="center">
   <a href="#-llm-application-architecture-chatbots-vs-copilots">⬆️ Back to top ⬆️</a>
   
-  <img src="https://img.shields.io/badge/Made_with-💻_&_🧠-blue?style=for-the-badge" alt="Made with">
 </div>
